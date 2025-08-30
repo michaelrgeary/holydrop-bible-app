@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { VerseDisplay } from './VerseDisplay';
+import { VirtualVerseList } from './VirtualVerseList';
 import { AnnotationSidebar } from '@/components/annotation/AnnotationSidebar';
 import { 
   useChapterAnnotations, 
@@ -88,22 +89,35 @@ export function ChapterContent({ book, bookUrl, chapter, verses }: ChapterConten
     ? formatReference(book, chapter, selectedVerse)
     : `${book} ${chapter}`;
 
+  // Use virtual scrolling for large chapters (> 50 verses)
+  const useVirtualScroll = verses.length > 50;
+
   return (
     <div className="relative">
       {/* Verses */}
-      <div className="space-y-4">
-        {verses.map((verse) => (
-          <VerseDisplay
-            key={verse.verse}
-            verseNumber={verse.verse}
-            text={verse.text}
+      {useVirtualScroll ? (
+        <div className="h-[600px] border rounded-lg bg-white dark:bg-gray-900">
+          <VirtualVerseList
+            verses={verses}
+            onVerseClick={(verseNumber) => handleShowAnnotations(verseNumber)}
+            selectedVerse={selectedVerse || undefined}
+          />
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {verses.map((verse) => (
+            <VerseDisplay
+              key={verse.verse}
+              verseNumber={verse.verse}
+              text={verse.text}
             annotationsCount={verseCounts[verse.verse] || 0}
             hasAnnotations={(verseCounts[verse.verse] || 0) > 0}
             onShowAnnotations={() => handleShowAnnotations(verse.verse)}
             onAddAnnotation={() => handleAddAnnotation(verse.verse)}
           />
         ))}
-      </div>
+        </div>
+      )}
 
       {/* Annotation Sidebar */}
       <AnnotationSidebar

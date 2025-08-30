@@ -4,39 +4,43 @@
   "verses": [
     {
       "verse": 1,
-      "text": "[Psalms 6:1] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "O LORD, rebuke me not in thine anger, neither chasten me in thy hot displeasure."
     },
     {
       "verse": 2,
-      "text": "[Psalms 6:2] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "Have mercy upon me, O LORD; for I [am] weak: O LORD, heal me; for my bones are vexed."
     },
     {
       "verse": 3,
-      "text": "[Psalms 6:3] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "My soul is also sore vexed: but thou, O LORD, how long?"
     },
     {
       "verse": 4,
-      "text": "[Psalms 6:4] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "Return, O LORD, deliver my soul: oh save me for thy mercies' sake."
     },
     {
       "verse": 5,
-      "text": "[Psalms 6:5] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "For in death [there is] no remembrance of thee: in the grave who shall give thee thanks?"
     },
     {
       "verse": 6,
-      "text": "[Psalms 6:6] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "I am weary with my groaning; all the night make I my bed to swim; I water my couch with my tears."
     },
     {
       "verse": 7,
-      "text": "[Psalms 6:7] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "Mine eye is consumed because of grief; it waxeth old because of all mine enemies."
     },
     {
       "verse": 8,
-      "text": "[Psalms 6:8] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "Depart from me, all ye workers of iniquity; for the LORD hath heard the voice of my weeping."
     },
     {
       "verse": 9,
-      "text": "[Psalms 6:9] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "The LORD hath heard my supplication; the LORD will receive my prayer."
+    },
+    {
+      "verse": 10,
+      "text": "Let all mine enemies be ashamed and sore vexed: let them return [and] be ashamed suddenly."
     }
   ]
 }

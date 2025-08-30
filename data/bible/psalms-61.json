@@ -4,27 +4,35 @@
   "verses": [
     {
       "verse": 1,
-      "text": "[Psalms 61:1] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "Hear my cry, O God; attend unto my prayer."
     },
     {
       "verse": 2,
-      "text": "[Psalms 61:2] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "From the end of the earth will I cry unto thee, when my heart is overwhelmed: lead me to the rock [that] is higher than I."
     },
     {
       "verse": 3,
-      "text": "[Psalms 61:3] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "For thou hast been a shelter for me, [and] a strong tower from the enemy."
     },
     {
       "verse": 4,
-      "text": "[Psalms 61:4] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "I will abide in thy tabernacle for ever: I will trust in the covert of thy wings. Selah."
     },
     {
       "verse": 5,
-      "text": "[Psalms 61:5] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "For thou, O God, hast heard my vows: thou hast given [me] the heritage of those that fear thy name."
     },
     {
       "verse": 6,
-      "text": "[Psalms 61:6] The text of this verse will be loaded when the complete KJV Bible data is imported. This is a placeholder to establish the correct structure."
+      "text": "Thou wilt prolong the king's life: [and] his years as many generations."
+    },
+    {
+      "verse": 7,
+      "text": "He shall abide before God for ever: O prepare mercy and truth, [which] may preserve him."
+    },
+    {
+      "verse": 8,
+      "text": "So will I sing praise unto thy name for ever, that I may daily perform my vows."
     }
   ]
 }
