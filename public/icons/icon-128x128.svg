@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg128" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0EA5E9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0369A1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow128">
+      <feDropShadow dx="2.56" dy="2.56" stdDeviation="2.56" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="128" height="128" fill="url(#bg128)"/>
+  
+  <!-- Water drop shape -->
+  <path d="M64 25.6 
+    C32 38.4, 25.6 64, 64 102.4
+    C102.4 64, 96 38.4, 64 25.6Z" 
+    fill="rgba(255,255,255,0.9)" 
+    filter="url(#shadow128)"/>
+  
+  <!-- HD Text -->
+  <text x="64" y="64" 
+    font-family="system-ui, -apple-system, sans-serif" 
+    font-size="28.16" 
+    font-weight="bold" 
+    fill="#0369A1" 
+    text-anchor="middle" 
+    dominant-baseline="middle">HD</text>
+</svg>
