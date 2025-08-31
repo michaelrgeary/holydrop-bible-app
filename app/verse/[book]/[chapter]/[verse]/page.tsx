@@ -3,7 +3,10 @@ import { notFound } from 'next/navigation';
 import { VerseService, POPULAR_VERSES } from '@/lib/services/verseService';
 import { VerseCardCreator } from '@/components/sharing/VerseCardCreator';
 import { ShareButtons } from '@/components/sharing/ShareButtons';
-import { BookOpen, Heart, Share2, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { BookOpen, Heart, ArrowLeft, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface VersePageProps {
@@ -221,58 +224,65 @@ export default async function VersePage({ params }: VersePageProps) {
           </div>
           
           {/* Main Verse Display */}
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 mb-8 text-center">
-            <div className="flex items-center justify-center mb-6">
-              <BookOpen className="w-6 h-6 text-water-500 mr-2" />
-              <span className="text-water-600 dark:text-water-400 font-medium">
-                {verseData.reference}
-              </span>
-            </div>
-            
-            <blockquote className="text-xl md:text-2xl leading-relaxed text-gray-900 dark:text-white font-serif italic mb-6">
-              "{verseData.text}"
-            </blockquote>
-            
-            <cite className="text-gray-600 dark:text-gray-400 font-medium">
-              — {verseData.reference}
-            </cite>
-            
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-              {prevVerse ? (
-                <Link
-                  href={`/verse/${book}/${chapter}/${verse - 1}`}
-                  className="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-water-600 dark:hover:text-water-400 transition-colors"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span className="hidden sm:inline">Previous verse</span>
-                  <span className="sm:hidden">Prev</span>
-                </Link>
-              ) : (
-                <div></div>
-              )}
+          <Card className="mb-8 border-0 shadow-xl bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+            <CardContent className="p-8 text-center">
+              <div className="flex items-center justify-center mb-6">
+                <BookOpen className="w-6 h-6 text-blue-500 mr-2" />
+                <span className="text-blue-600 font-medium">
+                  {verseData.reference}
+                </span>
+                {metadata.theme && (
+                  <Badge variant="secondary" className="ml-3">
+                    {metadata.theme}
+                  </Badge>
+                )}
+              </div>
               
-              <Link
-                href={`/${book}/${chapter}`}
-                className="px-4 py-2 bg-water-100 dark:bg-water-900/30 text-water-700 dark:text-water-300 rounded-lg hover:bg-water-200 dark:hover:bg-water-900/50 transition-colors"
-              >
-                View Chapter
-              </Link>
+              <blockquote className="text-xl md:text-2xl leading-relaxed text-slate-700 font-serif italic mb-6 relative">
+                <div className="absolute -left-4 -top-2 text-6xl text-blue-200 font-serif">"</div>
+                {verseData.text}
+                <div className="absolute -right-4 -bottom-6 text-6xl text-blue-200 font-serif">"</div>
+              </blockquote>
               
-              {nextVerse ? (
-                <Link
-                  href={`/verse/${book}/${chapter}/${verse + 1}`}
-                  className="flex items-center gap-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-water-600 dark:hover:text-water-400 transition-colors"
-                >
-                  <span className="hidden sm:inline">Next verse</span>
-                  <span className="sm:hidden">Next</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              ) : (
-                <div></div>
-              )}
-            </div>
-          </div>
+              <cite className="text-slate-600 font-medium">
+                — {verseData.reference}
+              </cite>
+              
+              {/* Navigation */}
+              <div className="flex items-center justify-between mt-8 pt-6 border-t border-slate-200">
+                {prevVerse ? (
+                  <Button variant="ghost" className="group" asChild>
+                    <Link href={`/verse/${book}/${chapter}/${verse - 1}`}>
+                      <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
+                      <span className="hidden sm:inline">Previous</span>
+                      <span className="sm:hidden">Prev</span>
+                    </Link>
+                  </Button>
+                ) : (
+                  <div></div>
+                )}
+                
+                <Button variant="outline" asChild>
+                  <Link href={`/${book}/${chapter}`}>
+                    <BookOpen className="w-4 h-4 mr-2" />
+                    View Chapter
+                  </Link>
+                </Button>
+                
+                {nextVerse ? (
+                  <Button variant="ghost" className="group" asChild>
+                    <Link href={`/verse/${book}/${chapter}/${verse + 1}`}>
+                      <span className="hidden sm:inline">Next</span>
+                      <span className="sm:hidden">Next</span>
+                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
+                ) : (
+                  <div></div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
           
           {/* Sharing Section */}
           <div className="grid lg:grid-cols-3 gap-6 mb-8">
@@ -302,31 +312,35 @@ export default async function VersePage({ params }: VersePageProps) {
           
           {/* Related Verses */}
           {relatedVerses.length > 0 && (
-            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              <div className="flex items-center gap-2 mb-6">
-                <Share2 className="w-5 h-5 text-water-500" />
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <Card className="border-0 shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Heart className="w-5 h-5 text-rose-500" />
                   Related Verses
-                </h2>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-4">
-                {relatedVerses.map((relatedVerse, index) => (
-                  <Link
-                    key={index}
-                    href={`/verse/${relatedVerse.book.toLowerCase().replace(/\s+/g, '-')}/${relatedVerse.chapter}/${relatedVerse.verse}`}
-                    className="block p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    <div className="text-sm text-water-600 dark:text-water-400 font-medium mb-2">
-                      {relatedVerse.reference}
-                    </div>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm line-clamp-3">
-                      "{relatedVerse.text}"
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {relatedVerses.map((relatedVerse, index) => (
+                    <Card key={index} className="hover:shadow-md transition-shadow">
+                      <CardContent className="p-4">
+                        <Link
+                          href={`/verse/${relatedVerse.book.toLowerCase().replace(/\s+/g, '-')}/${relatedVerse.chapter}/${relatedVerse.verse}`}
+                          className="block"
+                        >
+                          <Badge variant="outline" className="mb-3 text-xs">
+                            {relatedVerse.reference}
+                          </Badge>
+                          <p className="text-slate-700 text-sm leading-relaxed line-clamp-3">
+                            "{relatedVerse.text}"
+                          </p>
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           )}
         </div>
       </div>
