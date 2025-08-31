@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { Heart, BookOpen, Calendar, TrendingUp, X, ChevronRight } from 'lucide-react';
-import Link from 'next/link';
 
 interface WelcomeBackProps {
   onDismiss?: () => void;
