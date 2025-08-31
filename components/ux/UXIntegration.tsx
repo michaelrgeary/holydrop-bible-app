@@ -38,7 +38,7 @@ function UXComponents() {
     const searchInputs = document.querySelectorAll('input[type="search"]');
     searchInputs.forEach(input => {
       input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+        if ((e as KeyboardEvent).key === 'Enter') {
           const query = (e.target as HTMLInputElement).value;
           if (query) {
             analytics.trackSearch(query, 0); // Results count would be updated later
