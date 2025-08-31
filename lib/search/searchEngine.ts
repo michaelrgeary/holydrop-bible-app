@@ -397,8 +397,8 @@ export class OptimizedSearchEngine {
   }
   
   private async executeFallbackSearch(
-    parsedQuery: ParsedQuery, 
-    options: Required<SearchOptions>
+    _parsedQuery: ParsedQuery, 
+    _options: Required<SearchOptions>
   ): Promise<SearchResult[]> {
     // This would typically search through verses directly
     // For now, returning empty array as we have the optimized search
@@ -464,7 +464,7 @@ export class OptimizedSearchEngine {
     return Math.min(1.0, score);
   }
   
-  private calculateKeywordScore(keyword: string, indexEntry: any, verseId: string): number {
+  private calculateKeywordScore(_keyword: string, indexEntry: any, verseId: string): number {
     const positions = indexEntry.positions.find((p: any) => p.verseId === verseId);
     if (!positions) return 0;
     
@@ -534,7 +534,7 @@ export class OptimizedSearchEngine {
   
   private rankResults(
     results: SearchResult[], 
-    parsedQuery: ParsedQuery, 
+    _parsedQuery: ParsedQuery, 
     options: Required<SearchOptions>
   ): SearchResult[] {
     
@@ -647,7 +647,9 @@ export class OptimizedSearchEngine {
     // Implement LRU eviction
     if (this.cache.size >= this.maxCacheSize) {
       const firstKey = this.cache.keys().next().value;
-      this.cache.delete(firstKey);
+      if (firstKey) {
+        this.cache.delete(firstKey);
+      }
     }
     
     this.cache.set(key, result);

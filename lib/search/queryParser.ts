@@ -289,7 +289,7 @@ export class IntelligentQueryParser {
     const match = this.patterns.speakerQuery.exec(query);
     if (match) {
       const speaker = match[1].toLowerCase();
-      const _verb = match[2].toLowerCase();
+      // const _verb = match[2].toLowerCase(); // Not currently used
       
       result.speakers = [speaker];
       result.queryType = 'speaker-search';
@@ -642,8 +642,8 @@ export class IntelligentQueryParser {
     
     // Suggest related life situations
     result.lifeSituations.forEach(situation => {
-      const data = BIBLE_TAXONOMY.lifeSituations[situation];
-      data.relatedTopics.forEach(topic => {
+      const data = BIBLE_TAXONOMY.lifeSituations[situation as keyof typeof BIBLE_TAXONOMY.lifeSituations];
+      data.relatedTopics.forEach((topic: string) => {
         if (!result.originalQuery.toLowerCase().includes(topic)) {
           suggestions.push(`${result.originalQuery} ${topic}`);
         }
