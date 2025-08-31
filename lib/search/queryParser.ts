@@ -289,7 +289,7 @@ export class IntelligentQueryParser {
     const match = this.patterns.speakerQuery.exec(query);
     if (match) {
       const speaker = match[1].toLowerCase();
-      const verb = match[2].toLowerCase();
+      const _verb = match[2].toLowerCase();
       
       result.speakers = [speaker];
       result.queryType = 'speaker-search';
