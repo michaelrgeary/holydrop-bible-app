@@ -36,7 +36,7 @@ const defaultSettings: UserSettings = {
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<UserSettings>(defaultSettings);
-  const [isSaving, setIsSaving] = useState(false);
+  const [_isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
 
   // Load settings on mount
