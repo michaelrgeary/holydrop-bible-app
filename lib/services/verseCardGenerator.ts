@@ -117,8 +117,8 @@ export class VerseCardGenerator {
     // Check Canvas support with all required features
     if (typeof window !== 'undefined' && 
         'HTMLCanvasElement' in window &&
-        HTMLCanvasElement.prototype.getContext &&
-        HTMLCanvasElement.prototype.toBlob) {
+        typeof HTMLCanvasElement.prototype.getContext === 'function' &&
+        typeof HTMLCanvasElement.prototype.toBlob === 'function') {
       return 'canvas';
     }
     
@@ -182,7 +182,9 @@ export class VerseCardGenerator {
         if (this.cache.size >= this.MAX_CACHE_SIZE) {
           // Remove oldest entry
           const firstKey = this.cache.keys().next().value;
-          this.cache.delete(firstKey);
+          if (firstKey !== undefined) {
+            this.cache.delete(firstKey);
+          }
         }
         this.cache.set(cacheKey, blob);
       }
@@ -224,8 +226,8 @@ export class VerseCardGenerator {
     canvas.style.height = `${size.height}px`;
     ctx.scale(dpr, dpr);
     
-    // Enable font smoothing
-    ctx.textRenderingOptimization = 'optimizeQuality';
+    // Enable font smoothing (non-standard property, may not exist)
+    (ctx as any).textRenderingOptimization = 'optimizeQuality';
     
     // Draw background
     if (options.theme.backgroundType === 'gradient') {
@@ -358,7 +360,7 @@ export class VerseCardGenerator {
   
   private calculateOptimalFontSize(
     text: string,
-    size: CardSize,
+    _size: CardSize,
     format: string
   ): number {
     const baseSize = format === 'story' ? 52 : format === 'square' ? 44 : 38;

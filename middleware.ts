@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
 // Rate limiting storage (in production, use Redis or similar)
@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
   const response = await updateSession(request);
   
   // Get client IP
-  const ip = request.ip ?? request.headers.get('x-forwarded-for') ?? 'anonymous';
+  const ip = request.headers.get('x-forwarded-for') ?? request.headers.get('x-real-ip') ?? 'anonymous';
   
   // Rate limiting for API routes
   if (request.nextUrl.pathname.startsWith('/api/')) {

@@ -397,8 +397,8 @@ export class CollectionService {
             keyPath: 'id',
             autoIncrement: true 
           });
-          shareHistoryStore.createIndex('collectionId', 'collectionId');
-          shareHistoryStore.createIndex('sharedAt', 'sharedAt');
+          (shareHistoryStore as any).createIndex('collectionId', 'collectionId');
+          (shareHistoryStore as any).createIndex('sharedAt', 'sharedAt');
         }
       },
     });
@@ -606,8 +606,8 @@ export class CollectionService {
   async getShareHistory(collectionId: string): Promise<Array<{platform: string; sharedAt: Date}>> {
     try {
       const db = await this.initDB();
-      const history = await db.getAllFromIndex('shareHistory', 'collectionId', collectionId);
-      return history.map(h => ({
+      const history = await (db as any).getAllFromIndex('shareHistory', 'collectionId', collectionId);
+      return history.map((h: any) => ({
         platform: h.platform,
         sharedAt: h.sharedAt,
       }));

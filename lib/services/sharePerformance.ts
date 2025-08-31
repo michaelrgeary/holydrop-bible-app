@@ -230,7 +230,7 @@ export class SharePerformanceMonitor {
   // Get detailed performance report
   public getPerformanceReport(): {
     config: PerformanceConfig;
-    stats: ReturnType<typeof this.getPerformanceStats>;
+    stats: ReturnType<SharePerformanceService['getPerformanceStats']>;
     recommendations: string[];
   } {
     const stats = this.getPerformanceStats();

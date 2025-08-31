@@ -11,7 +11,7 @@ const LoadingDiv48 = () => React.createElement('div', { className: 'h-48 animate
 export const components = {
   // Sharing system (heavy canvas operations)
   ShareCardCreator: dynamic(
-    () => import('@/components/sharing/VerseCardCreator'),
+    () => import('@/components/sharing/VerseCardCreator').then(mod => ({ default: mod.VerseCardCreator })),
     { 
       loading: LoadingDiv,
       ssr: false 
@@ -29,7 +29,7 @@ export const components = {
   
   // Reading plans (complex UI)
   DailyReading: dynamic(
-    () => import('@/components/reading-plans/DailyReading'),
+    () => import('@/components/reading-plans/DailyReading').then(mod => ({ default: mod.DailyReading })),
     { loading: LoadingDiv64 }
   ),
   
