@@ -385,10 +385,10 @@ class EfficientIndexBuilder {
     }
     
     // Add common typos and their corrections (if available)
-    if (BIBLE_TAXONOMY.typoCorrections) {
-      for (const [typo, correction] of Object.entries(BIBLE_TAXONOMY.typoCorrections)) {
+    if ('typoCorrections' in BIBLE_TAXONOMY && (BIBLE_TAXONOMY as any).typoCorrections) {
+      for (const [typo, correction] of Object.entries((BIBLE_TAXONOMY as any).typoCorrections)) {
         allTerms.add(typo);
-        allTerms.add(correction);
+        allTerms.add(correction as string);
       }
     }
     
