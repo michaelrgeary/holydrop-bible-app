@@ -11,11 +11,6 @@ interface Chapter {
   verses: Verse[];
 }
 
-interface Book {
-  name: string;
-  chapters: Chapter[];
-}
-
 // Complete list of Bible books in order
 const BIBLE_BOOKS = [
   // Old Testament
