@@ -86,7 +86,7 @@ export class IntelligentQueryParser {
   private distanceCache = new Map<string, number>();
   
   // Common Bible book abbreviations
-  private bookAbbreviations: Map<string, string>;
+  private bookAbbreviations: Map<string, string> = new Map();
   
   // Regex patterns for different query types
   private patterns = {
