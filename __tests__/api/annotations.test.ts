@@ -1,6 +1,6 @@
 import { GET, POST } from '@/app/api/annotations/route'
 import { NextRequest } from 'next/server'
-import { mockAnnotation, isInMockMode } from '../utils/test-helpers'
+import { mockAnnotation } from '../utils/test-helpers'
 
 // Mock the Supabase server client
 jest.mock('@/lib/supabase/server', () => ({

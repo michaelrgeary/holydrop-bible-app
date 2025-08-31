@@ -100,7 +100,7 @@ describe('Dual Mode System', () => {
         'navigation',
       ]
       
-      features.forEach(feature => {
+      features.forEach(_ => {
         expect(isInMockMode()).toBe(true)
         // Feature should be available
       })
@@ -118,7 +118,7 @@ describe('Dual Mode System', () => {
         'navigation',
       ]
       
-      features.forEach(feature => {
+      features.forEach(_ => {
         expect(isInMockMode()).toBe(false)
         // Feature should be ready for real data
       })

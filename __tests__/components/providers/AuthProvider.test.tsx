@@ -62,7 +62,7 @@ describe('AuthProvider', () => {
   })
 
   it('handles sign in', async () => {
-    const { rerender } = render(
+    render(
       <AuthProvider>
         <TestComponent />
       </AuthProvider>

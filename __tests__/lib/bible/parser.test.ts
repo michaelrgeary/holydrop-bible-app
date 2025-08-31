@@ -117,7 +117,6 @@ describe('Bible Parser', () => {
 
   describe('Bible Data Completeness', () => {
     it('has all 1,189 chapters accessible', () => {
-      const totalChapters = 1189
       let accessibleChapters = 0
 
       // Test a sample of books to verify structure

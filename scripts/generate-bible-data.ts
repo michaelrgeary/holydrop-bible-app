@@ -6,11 +6,6 @@ interface Verse {
   text: string;
 }
 
-interface Chapter {
-  chapter: number;
-  verses: Verse[];
-}
-
 // Complete list of Bible books in order
 const BIBLE_BOOKS = [
   // Old Testament

@@ -1,7 +1,6 @@
 import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { AnnotationSidebar } from '@/components/annotation/AnnotationSidebar'
-import { mockAnnotation } from '../../utils/test-helpers'
 
 describe('AnnotationSidebar', () => {
   const defaultProps = {

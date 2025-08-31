@@ -1,9 +1,5 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-
-const execAsync = promisify(exec);
 
 interface PWATestResult {
   category: string;
@@ -203,7 +199,7 @@ async function testPWA() {
           for (const [key, value] of Object.entries(result.details)) {
             if (typeof value === 'object') {
               console.log(`     ${key}:`);
-              for (const [k, v] of Object.entries(value)) {
+              for (const [k, v] of Object.entries(value as Record<string, any>)) {
                 console.log(`       - ${k}: ${v}`);
               }
             } else {

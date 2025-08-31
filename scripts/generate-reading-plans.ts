@@ -216,7 +216,6 @@ function generateBibleInYear(): DailyReading[] {
 function generateGospelsIn30Days(): DailyReading[] {
   const readings: DailyReading[] = [];
   const gospels = ['matthew', 'mark', 'luke', 'john'];
-  const totalChapters = 89; // Total gospel chapters
   const chaptersPerDay = 3; // ~3 chapters per day
   
   let currentGospel = 0;
@@ -355,7 +354,6 @@ function generateNTIn90Days(): DailyReading[] {
     .filter(([_, data]) => data.testament === 'new')
     .sort((a, b) => a[1].order - b[1].order);
   
-  const totalChapters = 260;
   const chaptersPerDay = 3; // ~3 chapters per day for 90 days
   
   let currentBook = 0;
@@ -458,7 +456,7 @@ async function generateAllPlans() {
   console.log('\n📊 Reading Plan Statistics:');
   console.log('=' .repeat(50));
   
-  Object.entries(plans).forEach(([key, plan]) => {
+  Object.entries(plans).forEach(([_key, plan]) => {
     const totalPassages = plan.readings.reduce((sum, day) => sum + day.passages.length, 0);
     console.log(`\n📚 ${plan.name}:`);
     console.log(`   Duration: ${plan.duration} days`);

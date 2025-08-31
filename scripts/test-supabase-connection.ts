@@ -42,7 +42,7 @@ async function testConnection() {
   try {
     // Test 1: Check if we can connect
     console.log('Test 1: Basic connection...')
-    const { data: healthCheck, error: healthError } = await supabase
+    const { error: healthError } = await supabase
       .from('profiles')
       .select('count')
       .limit(1)

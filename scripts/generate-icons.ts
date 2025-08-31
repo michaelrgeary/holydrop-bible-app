@@ -36,11 +36,6 @@ function generateSVGIcon(size: number): string {
 </svg>`;
 }
 
-function generatePNGFromSVG(svgContent: string, size: number): string {
-  // For now, we'll save as SVG and note that conversion to PNG requires additional tools
-  return svgContent;
-}
-
 async function generateAllIcons() {
   console.log('💧 Generating HolyDrop PWA icons...');
   console.log('=' .repeat(50));

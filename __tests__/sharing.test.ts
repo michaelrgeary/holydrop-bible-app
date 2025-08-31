@@ -4,7 +4,7 @@
  * share API compatibility, SEO tags, and accessibility compliance
  */
 
-import { VerseCardGenerator, CardOptions, CardTheme } from '@/lib/services/verseCardGenerator';
+import { VerseCardGenerator, CardOptions } from '@/lib/services/verseCardGenerator';
 import { ShareAnalytics } from '@/lib/services/shareAnalytics';
 import { SharePerformanceMonitor } from '@/lib/services/sharePerformance';
 import { CollectionService, PRESET_COLLECTIONS } from '@/lib/services/collectionService';
@@ -73,7 +73,7 @@ global.window = {
 global.Blob = class MockBlob {
   size = 1000;
   type = 'image/jpeg';
-  constructor(public data: any[], options: any) {}
+  constructor(public data: any[], _options: any) {}
 } as any;
 
 global.ClipboardItem = class MockClipboardItem {
@@ -489,8 +489,6 @@ describe('Verse Service', () => {
 
 describe('Accessibility Compliance', () => {
   test('should generate cards with sufficient contrast', async () => {
-    const generator = new VerseCardGenerator();
-    
     // Test with all themes to ensure contrast compliance
     const themes = VerseCardGenerator.getThemes();
     for (const theme of themes) {

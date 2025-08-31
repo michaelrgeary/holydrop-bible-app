@@ -193,7 +193,7 @@ describe('UX Flow Integration Tests', () => {
     test('allows feedback type selection', async () => {
       render(<FeedbackWidget />);
       
-      fireEvent.click(screen.getByLabelLabel('Send Feedback'));
+      fireEvent.click(screen.getByLabelText('Send Feedback'));
       
       await waitFor(() => {
         expect(screen.getByText('Bug Report')).toBeInTheDocument();

@@ -137,7 +137,7 @@ test.describe('Annotations', () => {
     await expect(page.locator('text=ago')).toBeVisible();
   });
 
-  test('should handle annotation sidebar on mobile', async ({ page, browserName }) => {
+  test('should handle annotation sidebar on mobile', async ({ page }) => {
     // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
     
