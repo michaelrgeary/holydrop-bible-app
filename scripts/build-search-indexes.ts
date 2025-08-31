@@ -414,7 +414,7 @@ class EfficientIndexBuilder {
     this.reportProgress('Building semantic relationships...');
     
     // Map concepts to verse IDs using our taxonomy
-    for (const [situation, data] of Object.entries(BIBLE_TAXONOMY.lifeSituations)) {
+    for (const [situation, _data] of Object.entries(BIBLE_TAXONOMY.lifeSituations)) {
       this.semanticIndex.concepts.set(situation, []);
       
       // Find verses that match this life situation
