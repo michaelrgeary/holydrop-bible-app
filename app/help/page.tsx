@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { Search, BookOpen, Share2, Download, Smartphone, Keyboard, Mail, MessageCircle } from 'lucide-react';
+import { Search, BookOpen, Share2, Download, Keyboard, Mail, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
