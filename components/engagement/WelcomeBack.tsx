@@ -51,7 +51,7 @@ export function WelcomeBack({ onDismiss }: WelcomeBackProps) {
         // Get reading history
         const readingHistory = JSON.parse(localStorage.getItem('reading_history') || '[]');
         const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-        const readingProgress = JSON.parse(localStorage.getItem('reading_progress') || '{}');
+        // const readingProgress = JSON.parse(localStorage.getItem('reading_progress') || '{}');
         
         // Calculate stats
         const totalVerses = readingHistory.length || bookmarks.length || 0;

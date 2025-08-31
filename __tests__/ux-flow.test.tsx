@@ -1,9 +1,10 @@
+import React from 'react';
 /**
  * UX Flow Integration Tests
  * Tests the complete user experience flow from onboarding to advanced features
  */
 
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { WelcomeFlow } from '@/components/onboarding/WelcomeFlow';
 import { FirstActions } from '@/components/onboarding/FirstActions';

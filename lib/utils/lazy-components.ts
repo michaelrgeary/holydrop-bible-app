@@ -1,4 +1,11 @@
 import dynamic from 'next/dynamic';
+import React from 'react';
+
+// Type for loading components
+const LoadingDiv = () => React.createElement('div', { className: 'h-96 animate-pulse bg-gray-100 rounded' });
+const LoadingDiv12 = () => React.createElement('div', { className: 'h-12 animate-pulse bg-gray-100 rounded' });
+const LoadingDiv64 = () => React.createElement('div', { className: 'h-64 animate-pulse bg-gray-100 rounded' });
+const LoadingDiv48 = () => React.createElement('div', { className: 'h-48 animate-pulse bg-gray-100 rounded' });
 
 // Lazy load heavy components
 export const components = {
@@ -6,7 +13,7 @@ export const components = {
   ShareCardCreator: dynamic(
     () => import('@/components/sharing/VerseCardCreator'),
     { 
-      loading: () => <div className="h-96 animate-pulse bg-gray-100 rounded" />,
+      loading: LoadingDiv,
       ssr: false 
     }
   ),
@@ -15,7 +22,7 @@ export const components = {
   CommandSearch: dynamic(
     () => import('@/components/search/SearchBar').then(mod => ({ default: mod.SearchBar })),
     { 
-      loading: () => <div className="h-12 animate-pulse bg-gray-100 rounded" />,
+      loading: LoadingDiv12,
       ssr: false 
     }
   ),
@@ -23,14 +30,14 @@ export const components = {
   // Reading plans (complex UI)
   DailyReading: dynamic(
     () => import('@/components/reading-plans/DailyReading'),
-    { loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded" /> }
+    { loading: LoadingDiv64 }
   ),
   
   // Sharing buttons
   ShareButtons: dynamic(
     () => import('@/components/sharing/ShareButtons').then(mod => ({ default: mod.ShareButtons })),
     { 
-      loading: () => <div className="h-48 animate-pulse bg-gray-100 rounded" />,
+      loading: LoadingDiv48,
       ssr: false 
     }
   ),
@@ -39,7 +46,7 @@ export const components = {
   AchievementShare: dynamic(
     () => import('@/components/sharing/AchievementShare').then(mod => ({ default: mod.AchievementShare })),
     { 
-      loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded" />,
+      loading: LoadingDiv64,
       ssr: false 
     }
   ),

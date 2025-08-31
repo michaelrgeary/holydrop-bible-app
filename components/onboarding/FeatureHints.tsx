@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { X, Lightbulb, ChevronUp } from 'lucide-react';
+import { X, Lightbulb } from 'lucide-react';
 
 interface FeatureHint {
   id: string;

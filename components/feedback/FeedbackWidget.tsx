@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { MessageSquare, X, Send, Check, Bug, Lightbulb, Heart, AlertCircle } from 'lucide-react';
+import { useState } from 'react';
+import { MessageSquare, X, Send, Check, Bug, Lightbulb, Heart } from 'lucide-react';
 
 type FeedbackType = 'bug' | 'feature' | 'general' | 'appreciation';
 
