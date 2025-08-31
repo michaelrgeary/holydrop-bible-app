@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import { VerseService, POPULAR_VERSES } from '@/lib/services/verseService';
 import { VerseCardCreator } from '@/components/sharing/VerseCardCreator';
 import { ShareButtons } from '@/components/sharing/ShareButtons';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { BookOpen, Heart, ArrowLeft, ArrowRight } from 'lucide-react';
@@ -190,99 +189,116 @@ export default async function VersePage({ params }: VersePageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       
-      <div className="min-h-screen bg-gradient-to-b from-water-50 to-white dark:from-gray-900 dark:to-gray-800">
-        <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="min-h-screen water-gradient-subtle animate-fade-in">
+        <div className="container-width section-padding">
           {/* Header */}
-          <div className="text-center mb-8">
-            {/* Breadcrumb */}
-            <nav className="flex items-center justify-center text-sm text-gray-600 dark:text-gray-400 mb-4" aria-label="Breadcrumb">
-              <Link href="/" className="hover:text-water-600 dark:hover:text-water-400">
-                Home
-              </Link>
-              <span className="mx-2">/</span>
-              <Link href={`/${book}/${chapter}`} className="hover:text-water-600 dark:hover:text-water-400">
-                {verseData.book} {chapter}
-              </Link>
-              <span className="mx-2">/</span>
-              <span className="text-gray-900 dark:text-white">Verse {verse}</span>
+          <div className="text-center mb-12 animate-slide-down">
+            {/* Modern Breadcrumb */}
+            <nav className="flex items-center justify-center text-sm mb-6" aria-label="Breadcrumb">
+              <div className="glass-morphism px-6 py-3 rounded-full backdrop-blur-md border border-white/20">
+                <div className="flex items-center gap-3">
+                  <Link href="/" className="text-water-600 dark:text-water-400 hover:text-water-700 dark:hover:text-water-300 transition-colors duration-200 font-medium">
+                    Home
+                  </Link>
+                  <div className="w-1 h-1 bg-water-400 rounded-full"></div>
+                  <Link href={`/${book}/${chapter}`} className="text-water-600 dark:text-water-400 hover:text-water-700 dark:hover:text-water-300 transition-colors duration-200 font-medium">
+                    {verseData.book} {chapter}
+                  </Link>
+                  <div className="w-1 h-1 bg-water-400 rounded-full"></div>
+                  <span className="text-gray-900 dark:text-white font-semibold">Verse {verse}</span>
+                </div>
+              </div>
             </nav>
             
-            {/* Popular badge */}
+            {/* Popular badge with holy glow */}
             {metadata.isPopular && (
-              <div className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium mb-4">
-                <Heart className="w-3 h-3" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 glass-morphism holy-glow-subtle text-yellow-600 dark:text-yellow-400 rounded-full text-sm font-semibold mb-6 animate-pulse-water">
+                <Heart className="w-4 h-4" />
                 Popular Verse
               </div>
             )}
             
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-4xl md:text-4xl lg:text-5xl font-bold text-gradient-holy mb-4 animate-slide-down" style={{animationDelay: '0.1s'}}>
               {metadata.title}
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
+            <p className="text-xl md:text-2xl text-water-600 dark:text-water-400 font-medium animate-slide-down" style={{animationDelay: '0.2s'}}>
               {verseData.reference}
             </p>
           </div>
           
-          {/* Main Verse Display */}
-          <Card className="mb-8 border-0 shadow-xl bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-            <CardContent className="p-8 text-center">
-              <div className="flex items-center justify-center mb-6">
-                <BookOpen className="w-6 h-6 text-blue-500 mr-2" />
-                <span className="text-blue-600 font-medium">
-                  {verseData.reference}
-                </span>
-                {metadata.theme && (
-                  <Badge variant="secondary" className="ml-3">
-                    {metadata.theme}
-                  </Badge>
-                )}
+          {/* Main Verse Display - Glass Morphism Card */}
+          <div className="mb-12 animate-slide-up" style={{animationDelay: '0.3s'}}>
+            <div className="glass-morphism rounded-3xl p-8 md:p-12 text-center shadow-2xl holy-glow-subtle hover:shadow-3xl transition-all duration-500 group">
+              {/* Floating verse number with water theme */}
+              <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                <div className="water-gradient text-white px-6 py-3 rounded-full font-bold text-xl shadow-lg animate-bounce-gentle">
+                  {verse}
+                </div>
               </div>
               
-              <blockquote className="text-xl md:text-2xl leading-relaxed text-slate-700 font-serif italic mb-6 relative">
-                <div className="absolute -left-4 -top-2 text-6xl text-blue-200 font-serif">"</div>
-                {verseData.text}
-                <div className="absolute -right-4 -bottom-6 text-6xl text-blue-200 font-serif">"</div>
+              {/* Reference and theme badge */}
+              <div className="flex items-center justify-center mb-8 mt-4">
+                <div className="flex items-center gap-3 glass-morphism px-4 py-2 rounded-full">
+                  <BookOpen className="w-5 h-5 text-water-500" />
+                  <span className="text-water-700 dark:text-water-300 font-semibold">
+                    {verseData.reference}
+                  </span>
+                  {metadata.theme && (
+                    <Badge className="water-gradient text-white border-0 ml-2">
+                      {metadata.theme}
+                    </Badge>
+                  )}
+                </div>
+              </div>
+              
+              {/* Main verse text with elegant typography */}
+              <blockquote className="verse-text text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-800 dark:text-gray-100 mb-8 relative px-4 md:px-8">
+                <div className="absolute -left-2 md:-left-4 -top-4 text-6xl md:text-8xl text-water-200 dark:text-water-700 font-serif opacity-50 animate-fade-in">"</div>
+                <span className="relative z-10 inline-block group-hover:text-gradient-holy transition-all duration-700">
+                  {verseData.text}
+                </span>
+                <div className="absolute -right-2 md:-right-4 -bottom-8 text-6xl md:text-8xl text-water-200 dark:text-water-700 font-serif opacity-50 animate-fade-in" style={{animationDelay: '0.5s'}}>"</div>
               </blockquote>
               
-              <cite className="text-slate-600 font-medium">
+              <cite className="text-water-600 dark:text-water-400 font-semibold text-lg">
                 — {verseData.reference}
               </cite>
               
-              {/* Navigation */}
-              <div className="flex items-center justify-between mt-8 pt-6 border-t border-slate-200">
+              {/* Enhanced Navigation */}
+              <div className="flex items-center justify-between mt-10 pt-8 border-t border-water-200/30 dark:border-water-700/30">
                 {prevVerse ? (
-                  <Button variant="ghost" className="group" asChild>
+                  <Button variant="ghost" className="btn-glass group water-drop-button" asChild>
                     <Link href={`/verse/${book}/${chapter}/${verse - 1}`}>
-                      <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
-                      <span className="hidden sm:inline">Previous</span>
-                      <span className="sm:hidden">Prev</span>
+                      <ArrowLeft className="w-5 h-5 mr-2 transition-all duration-300 group-hover:-translate-x-2 group-hover:text-water-500" />
+                      <span className="hidden sm:inline font-medium">Previous Verse</span>
+                      <span className="sm:hidden font-medium">Prev</span>
                     </Link>
                   </Button>
                 ) : (
                   <div></div>
                 )}
                 
-                <Button variant="outline" asChild>
+                <Button className="btn-holy group relative overflow-hidden" asChild>
                   <Link href={`/${book}/${chapter}`}>
-                    <BookOpen className="w-4 h-4 mr-2" />
-                    View Chapter
+                    <BookOpen className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="relative z-10">View Chapter</span>
                   </Link>
                 </Button>
                 
                 {nextVerse ? (
-                  <Button variant="ghost" className="group" asChild>
+                  <Button variant="ghost" className="btn-glass group water-drop-button" asChild>
                     <Link href={`/verse/${book}/${chapter}/${verse + 1}`}>
-                      <span className="hidden sm:inline">Next</span>
-                      <span className="sm:hidden">Next</span>
-                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                      <span className="hidden sm:inline font-medium">Next Verse</span>
+                      <span className="sm:hidden font-medium">Next</span>
+                      <ArrowRight className="w-5 h-5 ml-2 transition-all duration-300 group-hover:translate-x-2 group-hover:text-water-500" />
                     </Link>
                   </Button>
                 ) : (
                   <div></div>
                 )}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
           
           {/* Sharing Section */}
           <div className="grid lg:grid-cols-3 gap-6 mb-8">
@@ -310,37 +326,44 @@ export default async function VersePage({ params }: VersePageProps) {
             </div>
           </div>
           
-          {/* Related Verses */}
+          {/* Related Verses - Modern Glass Cards */}
           {relatedVerses.length > 0 && (
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-rose-500" />
-                  Related Verses
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-4">
+            <div className="animate-slide-up" style={{animationDelay: '0.6s'}}>
+              <div className="glass-morphism rounded-2xl p-6 md:p-8 shadow-xl">
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center gap-3 glass-morphism px-6 py-3 rounded-full">
+                    <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
+                    <h2 className="text-xl font-bold text-gradient-holy">Related Verses</h2>
+                  </div>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
                   {relatedVerses.map((relatedVerse, index) => (
-                    <Card key={index} className="hover:shadow-md transition-shadow">
-                      <CardContent className="p-4">
-                        <Link
-                          href={`/verse/${relatedVerse.book.toLowerCase().replace(/\s+/g, '-')}/${relatedVerse.chapter}/${relatedVerse.verse}`}
-                          className="block"
-                        >
-                          <Badge variant="outline" className="mb-3 text-xs">
+                    <div 
+                      key={index} 
+                      className="glass-morphism-hover rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:holy-glow-subtle group animate-fade-in"
+                      style={{animationDelay: `${0.1 * index}s`}}
+                    >
+                      <Link
+                        href={`/verse/${relatedVerse.book.toLowerCase().replace(/\s+/g, '-')}/${relatedVerse.chapter}/${relatedVerse.verse}`}
+                        className="block"
+                      >
+                        <div className="flex items-center justify-between mb-4">
+                          <Badge className="water-gradient text-white border-0 px-3 py-1 text-xs font-semibold">
                             {relatedVerse.reference}
                           </Badge>
-                          <p className="text-slate-700 text-sm leading-relaxed line-clamp-3">
-                            "{relatedVerse.text}"
-                          </p>
-                        </Link>
-                      </CardContent>
-                    </Card>
+                          <ArrowRight className="w-4 h-4 text-water-400 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+                        </div>
+                        
+                        <blockquote className="verse-text text-base text-gray-700 dark:text-gray-200 leading-relaxed line-clamp-3 group-hover:text-water-700 dark:group-hover:text-water-300 transition-colors duration-300">
+                          "{relatedVerse.text}"
+                        </blockquote>
+                      </Link>
+                    </div>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           )}
         </div>
       </div>

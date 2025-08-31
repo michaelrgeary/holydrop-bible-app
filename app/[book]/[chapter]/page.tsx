@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { getBookInfo, bookNameToUrl } from '@/lib/bible/books';
 import { getChapter } from '@/lib/bible/parser';
 import { SearchBar } from '@/components/search/SearchBar';
@@ -51,116 +52,118 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
   const prevChapter = chapterNumber > 1 ? chapterNumber - 1 : null;
   const nextChapter = chapterNumber < bookInfo.totalChapters ? chapterNumber + 1 : null;
 
-  // Check if this is a long chapter (use virtualization for chapters with many verses)
-  const useVirtualization = verses.length > 30;
+  // Long chapters are handled by VirtualizedChapterContent component
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <div className="relative max-w-4xl mx-auto px-4 py-8">
-        {/* Breadcrumb */}
-        <nav className="text-sm mb-6">
-          <ol className="flex items-center space-x-2 text-blue-600">
-            <li>
-              <Link href="/" className="hover:text-blue-800 transition-colors">
-                Home
+    <div className="min-h-screen water-gradient-subtle animate-fade-in">
+      <div className="container-width">
+        {/* Modern Sticky Header with Blur Background */}
+        <div className="sticky top-0 z-40 glass-morphism backdrop-blur-md border-b border-white/20">
+          <div className="section-padding py-4">
+            {/* Modern Breadcrumb */}
+            <nav className="text-sm mb-4" aria-label="Breadcrumb">
+              <div className="glass-morphism px-6 py-3 rounded-full backdrop-blur-md border border-white/20 inline-flex">
+                <div className="flex items-center gap-3">
+                  <Link href="/" className="text-water-600 dark:text-water-400 hover:text-water-700 dark:hover:text-water-300 transition-colors duration-200 font-medium">
+                    Home
+                  </Link>
+                  <div className="w-1 h-1 bg-water-400 rounded-full"></div>
+                  <span className="text-water-600 dark:text-water-400 font-medium">{bookInfo.name}</span>
+                  <div className="w-1 h-1 bg-water-400 rounded-full"></div>
+                  <span className="text-gray-900 dark:text-white font-semibold">Chapter {chapterNumber}</span>
+                </div>
+              </div>
+            </nav>
+
+            {/* Chapter Title */}
+            <div className="text-center">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-holy mb-2 animate-slide-down">
+                {bookInfo.name} {chapterNumber}
+              </h1>
+              <p className="text-water-600 dark:text-water-400 font-medium animate-slide-down" style={{animationDelay: '0.1s'}}>
+                {bookInfo.testament}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Enhanced Search Bar */}
+        <div className="section-padding py-6">
+          <div className="max-w-2xl mx-auto animate-slide-up">
+            <SearchBar 
+              currentBook={bookInfo.name} 
+              currentChapter={chapterNumber}
+              sticky={false}
+            />
+          </div>
+        </div>
+
+        {/* Enhanced Chapter Navigation */}
+        <div className="section-padding">
+          <div className="flex justify-between items-center mb-8 animate-slide-up" style={{animationDelay: '0.2s'}}>
+            {prevChapter ? (
+              <Link
+                href={`/${bookNameToUrl(bookInfo.name)}/${prevChapter}`}
+                className="btn-glass group water-drop-button flex items-center gap-2"
+              >
+                <ArrowLeft className="w-4 h-4 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-water-500" />
+                <span className="font-medium">Chapter {prevChapter}</span>
               </Link>
-            </li>
-            <li className="text-gray-400">/</li>
-            <li>
-              <span className="text-gray-700">{bookInfo.name}</span>
-            </li>
-            <li className="text-gray-400">/</li>
-            <li>
-              <span className="text-gray-900 font-medium">Chapter {chapterNumber}</span>
-            </li>
-          </ol>
-        </nav>
+            ) : (
+              <div />
+            )}
+            
+            {nextChapter ? (
+              <Link
+                href={`/${bookNameToUrl(bookInfo.name)}/${nextChapter}`}
+                className="btn-glass group water-drop-button flex items-center gap-2"
+              >
+                <span className="font-medium">Chapter {nextChapter}</span>
+                <ArrowRight className="w-4 h-4 transition-all duration-300 group-hover:translate-x-1 group-hover:text-water-500" />
+              </Link>
+            ) : (
+              <div />
+            )}
+          </div>
 
-        {/* Chapter Title */}
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            {bookInfo.name} {chapterNumber}
-          </h1>
-          <p className="text-gray-600">{bookInfo.testament}</p>
-        </div>
+          {/* Chapter Content with Enhanced Styling */}
+          <div className="glass-morphism rounded-2xl p-4 md:p-6 shadow-xl animate-slide-up" style={{animationDelay: '0.3s'}} id="chapter-content">
+            <div className="prose prose-lg max-w-none">
+              <VirtualizedChapterContent
+                book={bookInfo.name}
+                bookUrl={book}
+                chapter={chapterNumber}
+                verses={verses}
+              />
+            </div>
+          </div>
 
-        {/* Sticky Search Bar */}
-        <div className="mb-8">
-          <SearchBar 
-            currentBook={bookInfo.name} 
-            currentChapter={chapterNumber}
-            sticky={true}
-          />
-        </div>
-
-        {/* Chapter Navigation */}
-        <div className="flex justify-between items-center mb-8">
-          {prevChapter ? (
-            <Link
-              href={`/${bookNameToUrl(bookInfo.name)}/${prevChapter}`}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              ← Chapter {prevChapter}
-            </Link>
-          ) : (
-            <div />
-          )}
-          
-          {nextChapter ? (
-            <Link
-              href={`/${bookNameToUrl(bookInfo.name)}/${nextChapter}`}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              Chapter {nextChapter} →
-            </Link>
-          ) : (
-            <div />
-          )}
-        </div>
-
-        {/* Chapter Content - Virtualized for performance */}
-        <div className="mb-12" id="chapter-content">
-          {useVirtualization ? (
-            <VirtualizedChapterContent
-              book={bookInfo.name}
-              bookUrl={book}
-              chapter={chapterNumber}
-              verses={verses}
-            />
-          ) : (
-            // Use regular ChapterContent for shorter chapters
-            <VirtualizedChapterContent
-              book={bookInfo.name}
-              bookUrl={book}
-              chapter={chapterNumber}
-              verses={verses}
-            />
-          )}
-        </div>
-
-        {/* Bottom Chapter Navigation */}
-        <div className="flex justify-between items-center pt-8 border-t border-gray-200">
-          {prevChapter ? (
-            <Link
-              href={`/${bookNameToUrl(bookInfo.name)}/${prevChapter}`}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              ← Chapter {prevChapter}
-            </Link>
-          ) : (
-            <div />
-          )}
-          
-          {nextChapter ? (
-            <Link
-              href={`/${bookNameToUrl(bookInfo.name)}/${nextChapter}`}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              Chapter {nextChapter} →
-            </Link>
-          ) : (
-            <div />
-          )}
+          {/* Bottom Chapter Navigation with Enhanced Styling */}
+          <div className="flex justify-between items-center mt-12 pt-8 border-t border-water-200/30 dark:border-water-700/30 animate-slide-up" style={{animationDelay: '0.4s'}}>
+            {prevChapter ? (
+              <Link
+                href={`/${bookNameToUrl(bookInfo.name)}/${prevChapter}`}
+                className="btn-holy group flex items-center gap-3"
+              >
+                <ArrowLeft className="w-5 h-5 transition-all duration-300 group-hover:-translate-x-2" />
+                <span className="font-semibold">Previous Chapter</span>
+              </Link>
+            ) : (
+              <div />
+            )}
+            
+            {nextChapter ? (
+              <Link
+                href={`/${bookNameToUrl(bookInfo.name)}/${nextChapter}`}
+                className="btn-holy group flex items-center gap-3"
+              >
+                <span className="font-semibold">Next Chapter</span>
+                <ArrowRight className="w-5 h-5 transition-all duration-300 group-hover:translate-x-2" />
+              </Link>
+            ) : (
+              <div />
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -64,7 +64,7 @@ const VerseMemo = memo(({
   if (!verse) return null;
 
   return (
-    <div style={style} className="px-4">
+    <div style={style} className="px-2 md:px-4 py-2">
       <VerseDisplay
         verseNumber={verse.verse}
         text={verse.text}
@@ -86,14 +86,15 @@ const VerseMemo = memo(({
 
 VerseMemo.displayName = 'VerseMemo';
 
-// Loading skeleton for verses
+// Modern loading skeleton for verses
 const VerseSkeleton = () => (
-  <div className="p-4 rounded-lg bg-white animate-pulse">
-    <div className="flex items-start gap-3">
-      <div className="w-8 h-6 bg-gray-200 rounded" />
-      <div className="flex-1 space-y-2">
-        <div className="h-4 bg-gray-200 rounded w-full" />
-        <div className="h-4 bg-gray-200 rounded w-3/4" />
+  <div className="p-6 rounded-xl glass-morphism animate-pulse mb-4">
+    <div className="flex items-start gap-4">
+      <div className="w-10 h-10 bg-water-200 dark:bg-water-700 rounded-full skeleton-shimmer" />
+      <div className="flex-1 space-y-3">
+        <div className="h-5 bg-water-200 dark:bg-water-700 rounded-lg w-full skeleton-shimmer" />
+        <div className="h-5 bg-water-200 dark:bg-water-700 rounded-lg w-4/5 skeleton-shimmer" />
+        <div className="h-5 bg-water-200 dark:bg-water-700 rounded-lg w-3/5 skeleton-shimmer" />
       </div>
     </div>
   </div>
@@ -196,11 +197,11 @@ export function VirtualizedChapterContent({
       <List
         height={getListHeight()}
         itemCount={verses.length}
-        itemSize={100} // Estimated height per verse
+        itemSize={140} // Increased height for modern verse styling
         width="100%"
         itemData={itemData}
-        overscanCount={5} // Render 5 extra items outside viewport
-        className="scrollbar-thin scrollbar-thumb-water-400 scrollbar-track-gray-100"
+        overscanCount={3} // Render 3 extra items outside viewport for better performance
+        className="scrollbar-thin scrollbar-thumb-water-400 scrollbar-track-gray-100 animate-fade-in"
       >
         {VerseMemo}
       </List>
