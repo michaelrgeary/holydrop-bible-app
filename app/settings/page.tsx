@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { Settings, Moon, Sun, Type, Bell, Database, Info, Trash2, Download, Check } from 'lucide-react';
-import { Metadata } from 'next';
 
 // Since we're using 'use client', we can't export metadata directly
 // This would typically be handled by a parent layout or wrapper
