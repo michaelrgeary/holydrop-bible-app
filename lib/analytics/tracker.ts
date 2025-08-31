@@ -35,7 +35,6 @@ class AnalyticsTracker {
   private anonymousId: string;
   private sessionId: string;
   private isEnabled: boolean;
-  private _queue: (AnalyticsEvent | PageView)[] = [];
   private sessionStartTime: number;
 
   constructor() {
