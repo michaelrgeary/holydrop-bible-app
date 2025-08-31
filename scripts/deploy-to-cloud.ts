@@ -29,7 +29,7 @@ async function testConnection() {
   
   try {
     // Test basic connection
-    const { data, error } = await supabase.from('annotations').select('count');
+    const { data: _data, error } = await supabase.from('annotations').select('count');
     
     if (error && error.code === '42P01') {
       console.log('✅ Connected to Supabase successfully!');
