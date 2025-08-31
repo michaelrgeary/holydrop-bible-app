@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
-import { Search, BookOpen, Share2, Download, Keyboard, Mail, MessageCircle } from 'lucide-react';
+import { Search, BookOpen, Share2, Download, Keyboard, Mail } from 'lucide-react';
 import Link from 'next/link';
+import { FeedbackButton } from '@/components/help/FeedbackButton';
 
 export const metadata: Metadata = {
   title: 'Help Center - HolyDrop',
@@ -254,17 +255,7 @@ export default function HelpPage() {
               <Mail className="w-4 h-4" />
               Email Support
             </Link>
-            <button
-              onClick={() => {
-                // This would trigger the feedback widget
-                const feedbackButton = document.querySelector('[aria-label="Send Feedback"]') as HTMLButtonElement;
-                feedbackButton?.click();
-              }}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            >
-              <MessageCircle className="w-4 h-4" />
-              Send Feedback
-            </button>
+            <FeedbackButton />
           </div>
         </div>
       </div>
