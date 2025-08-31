@@ -274,7 +274,7 @@ class EfficientIndexBuilder {
     
     // Add book-specific keywords
     const bookKey = verse.book.toLowerCase().replace(/\s+/g, '-').replace(/^\d-/, '');
-    const bookData = BIBLE_TAXONOMY.bookMetadata?.[bookKey];
+    const bookData = BIBLE_TAXONOMY.bookMetadata?.[bookKey as keyof typeof BIBLE_TAXONOMY.bookMetadata];
     if (bookData) {
       keywords.push(...bookData.themes);
     }
@@ -481,7 +481,7 @@ class EfficientIndexBuilder {
     
     // Book type features (50-99)
     const bookKey = verse.book.toLowerCase().replace(/\s+/g, '-').replace(/^\d-/, '');
-    const bookData = BIBLE_TAXONOMY.bookMetadata?.[bookKey];
+    const bookData = BIBLE_TAXONOMY.bookMetadata?.[bookKey as keyof typeof BIBLE_TAXONOMY.bookMetadata];
     if (bookData) {
       switch (bookData.genre) {
         case 'law': features[50] = 1; break;
