@@ -52,3 +52,4 @@ playwright-report/
 
 # logs
 *.log
+data/search-indexes.json
