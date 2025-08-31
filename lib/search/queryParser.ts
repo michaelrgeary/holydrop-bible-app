@@ -263,7 +263,7 @@ export class IntelligentQueryParser {
     
     this.patterns.verseReference.lastIndex = 0;
     while ((match = this.patterns.verseReference.exec(query)) !== null) {
-      const [fullMatch, prefix, book, chapter, verse, endVerse] = match;
+      const [fullMatch, _prefix, book, chapter, verse, endVerse] = match;
       
       const normalizedBook = this.normalizeBookName(book);
       if (normalizedBook) {
