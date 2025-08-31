@@ -57,7 +57,7 @@ export function ShareButtons({ verse, url }: ShareButtonsProps) {
     return () => window.removeEventListener('resize', checkCapabilities);
   }, []);
   
-  const shareUrl = url || `${window.location.origin}/verse/${verse.book}/${verse.chapter}/${verse.verse}`;
+  const shareUrl = url || (typeof window !== 'undefined' ? `${window.location.origin}/verse/${verse.book}/${verse.chapter}/${verse.verse}` : '');
   const shareText = `"${verse.text}" - ${verse.book} ${verse.chapter}:${verse.verse}`;
   const shareTitle = `${verse.book} ${verse.chapter}:${verse.verse} - HolyDrop`;
   
@@ -68,7 +68,7 @@ export function ShareButtons({ verse, url }: ShareButtonsProps) {
       icon: MessageCircle,
       color: 'bg-green-500 hover:bg-green-600',
       getUrl: (text, url) => `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`,
-      available: isMobile || window.innerWidth < 1024,
+      available: isMobile || (typeof window !== 'undefined' && window.innerWidth < 1024),
     },
     {
       id: 'twitter',

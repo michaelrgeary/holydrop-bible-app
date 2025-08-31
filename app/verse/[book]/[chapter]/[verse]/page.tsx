@@ -284,20 +284,6 @@ export default async function VersePage({ params }: VersePageProps) {
                   chapter,
                   verseNumber: verse
                 }}
-                onShare={(format, theme) => {
-                  console.log(`Shared ${format} with ${theme} theme`);
-                  // Track sharing analytics (privacy-respecting)
-                  if (typeof window !== 'undefined' && window.localStorage) {
-                    try {
-                      const stats = JSON.parse(localStorage.getItem('shareStats') || '{}');
-                      const key = `${book}-${chapter}-${verse}`;
-                      stats[key] = (stats[key] || 0) + 1;
-                      localStorage.setItem('shareStats', JSON.stringify(stats));
-                    } catch (e) {
-                      // Ignore errors
-                    }
-                  }
-                }}
               />
             </div>
             

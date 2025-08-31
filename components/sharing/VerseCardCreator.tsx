@@ -156,6 +156,18 @@ export function VerseCardCreator({ verse, onShare }: VerseCardCreatorProps) {
   const handleShare = async () => {
     if (!generatedCard) return;
     
+    // Track sharing analytics (privacy-respecting)
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        const stats = JSON.parse(localStorage.getItem('shareStats') || '{}');
+        const key = `${verse.book}-${verse.chapter}-${verse.verseNumber}`;
+        stats[key] = (stats[key] || 0) + 1;
+        localStorage.setItem('shareStats', JSON.stringify(stats));
+      } catch (e) {
+        // Ignore errors
+      }
+    }
+    
     onShare?.(selectedFormat, selectedTheme.id);
     
     // Check for native share API
