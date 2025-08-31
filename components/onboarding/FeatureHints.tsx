@@ -24,7 +24,7 @@ function SingleHint({ hint, onDismiss }: FeatureHintProps) {
 
   useEffect(() => {
     const targetElement = document.querySelector(hint.targetSelector);
-    if (!targetElement) return;
+    if (!targetElement) return () => {}; // Return empty cleanup function
 
     const updatePosition = () => {
       const rect = targetElement.getBoundingClientRect();
@@ -86,6 +86,9 @@ function SingleHint({ hint, onDismiss }: FeatureHintProps) {
       targetElement.addEventListener('click', handleInteraction);
       return () => targetElement.removeEventListener('click', handleInteraction);
     }
+    
+    // Default return for any other case
+    return () => {};
   }, [hint]);
 
   const handleDismiss = () => {
